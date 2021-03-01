@@ -1,6 +1,7 @@
-// BFS algorithm
+// A-star's algorithm
 // return all nodes in the order of visited.
 // Make nodes point back to their previous node, which allows us to get the shortest path by backtracking from the finish node.
+var Heap = require("heap");
 
 export function astar(grid, startNode, finishNode) {
   if (!startNode || !finishNode || startNode === finishNode) {
