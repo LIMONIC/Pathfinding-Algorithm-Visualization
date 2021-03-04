@@ -3,7 +3,7 @@ import Node from "./Node/Node";
 import { dijkstra, getNodesInShortestPathOrder } from "../Algorithms/dijkstra";
 import { astar, getNodesInShortestPathOrderOfAstar } from "../Algorithms/astar";
 import { bfs, getNodesInShortestPathOrderOfBFS } from "../Algorithms/BFS";
-// import useWindowDimensions from "../components/useWindowDimensions";
+import Button from "../components/Button";
 import "./PathfindingVisualizer.css";
 import "./Node/Node.css";
 
@@ -108,19 +108,29 @@ export default class PathfindingVisualizer extends Component {
           <div className="jumbotron jumbotron-fluid">
             <div className="container">
               <h1 className="title">Pathfinding Visualizer</h1>
-              <div className="operation-panel">
-                <button
+              <div className="row operation-panel">
+                <Button
+                  name="Dijkstra"
+                  className="btn btn-primary"
                   onClick={() => this.visualize("Dijkstra")}
-                  className="btn"
-                >
-                  Dijkstra
-                </button>
-                <button onClick={() => this.visualize("astar")} className="btn">
-                  A*
-                </button>
-                <button onClick={() => this.visualize("bfs")} className="btn">
-                  BFS
-                </button>
+                ></Button>
+                <Button
+                  name="A*"
+                  className="btn btn-primary"
+                  onClick={() => this.visualize("astar")}
+                ></Button>
+                <Button
+                  name="BFS"
+                  className="btn btn-primary"
+                  onClick={() => this.visualize("bfs")}
+                ></Button>
+                <Button
+                  name="Clear Board"
+                  className="btn btn-outline-primary"
+                  onClick={() => {
+                    window.location.reload();
+                  }}
+                ></Button>
               </div>
             </div>
             <div className="instruction">
@@ -187,7 +197,6 @@ export default class PathfindingVisualizer extends Component {
 
 const GetInitialGrid = () => {
   const grid = [];
-  console.log(maxRow + " " + maxCol);
   for (let row = 0; row < maxRow; row++) {
     const currentRow = [];
     for (let col = 0; col < maxCol; col++) {

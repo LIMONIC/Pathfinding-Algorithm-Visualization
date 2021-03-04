@@ -7,7 +7,7 @@ header h1 {
     font-weight: 200;
   }
 
-.operation-panel {
+/* .operation-panel {
     text-align: center;
 }
 
@@ -46,7 +46,7 @@ header h1 {
     background: #8a8a8a;
     padding: 10px 20px 10px 20px;
     text-decoration: none;
-}
+} */
 
 .operation-panel .btn-unavaliable:hover{
     text-decoration: none;
