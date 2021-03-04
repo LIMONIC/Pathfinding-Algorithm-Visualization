@@ -12,7 +12,6 @@ export default class Node extends Component {
       onMouseEnter,
       onMouseUp,
       row,
-      // distance,
     } = this.props;
 
     // determine what calss to apply
@@ -34,8 +33,8 @@ export default class Node extends Component {
         onMouseDown={() => onMouseDown(row, col)}
         onMouseEnter={() => onMouseEnter(row, col)}
         onMouseUp={() => onMouseUp()}
-        //{`${distance}`}
       ></td>
+      //{`${row} ${col}`}
     );
   }
 }

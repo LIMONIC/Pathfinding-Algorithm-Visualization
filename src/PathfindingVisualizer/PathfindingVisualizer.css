@@ -1,3 +1,72 @@
 .grid{
-    margin: 100px 0 0;
+    /* position: absolute; */
+    margin: auto;
+    /* min-width: 100%; */
 }
+
+.instruction div{
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    position: relative;
+    top: 0.35em;
+    margin: 0 0.42em;
+}
+
+.instruction > ul li{
+    display: inline-block;
+    list-style: none;
+    padding: 0 28px 0 0;
+    
+}
+
+.start{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation-name: specialNodes;
+    animation-duration: 2.0s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+
+.unvisited{
+    border: 1px solid rgb(0, 0, 0);
+    background-color:white;
+    height: 23px;
+    width: 23px;
+  }
+
+
+.jumbotron-fluid{
+    padding-top: 0px;
+    padding-bottom: 10px;
+}
+
+.operation-panel{
+    margin: 5%;;
+}
+
+table {
+    table-layout: fixed;
+}
+.table-container{
+    overflow:auto;
+    display: block;
+}
+
+td{
+    white-space: nowrap;
+}
+tr{
+    white-space: nowrap;
+    word-break: keep-all;
+}
+/* .grid-body{
+    margin: 100px;
+} */

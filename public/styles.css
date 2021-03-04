@@ -1,7 +1,5 @@
 header {
     text-align: center;
-    background-color: grey;
-    
 }
 
 header h1 {
@@ -55,6 +53,6 @@ header h1 {
 }
 
 body{
-    background-image: url("/assets/img/fabric-of-squares.png");
+    /* background-image: url("/assets/img/fabric-of-squares.png"); */
 
   }

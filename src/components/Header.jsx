@@ -1,11 +1,9 @@
 import React from "react";
+import PathfindingVisualizer from "../PathfindingVisualizer/PathfindingVisualizer";
+import "./Header.css";
 
 function Header() {
-  return (
-    <header>
-      <h1>Pathfinding Visualization</h1>
-    </header>
-  );
+  return <header></header>;
 }
 
 export default Header;

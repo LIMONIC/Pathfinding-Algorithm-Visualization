@@ -2,12 +2,19 @@ import React, { Component } from "react";
 import Node from "./Node/Node";
 import { dijkstra, getNodesInShortestPathOrder } from "../Algorithms/dijkstra";
 import { astar, getNodesInShortestPathOrderOfAstar } from "../Algorithms/astar";
+import { bfs, getNodesInShortestPathOrderOfBFS } from "../Algorithms/BFS";
+// import useWindowDimensions from "../components/useWindowDimensions";
 import "./PathfindingVisualizer.css";
+import "./Node/Node.css";
 
-const START_NODE_ROW = 10;
-const START_NODE_COL = 15;
-const FINISH_NODE_ROW = 10;
-const FINISH_NODE_COL = 35;
+const height = window.innerHeight;
+const width = window.innerWidth;
+const maxRow = height / 40;
+const maxCol = width / 30;
+const START_NODE_ROW = Math.floor(maxRow * 0.5);
+const START_NODE_COL = Math.floor(maxCol * 0.25);
+const FINISH_NODE_ROW = Math.floor(maxRow * 0.5);
+const FINISH_NODE_COL = Math.floor(maxCol * 0.75);
 
 export default class PathfindingVisualizer extends Component {
   constructor() {
@@ -19,7 +26,7 @@ export default class PathfindingVisualizer extends Component {
   }
 
   componentDidMount() {
-    const grid = getInitialGrid();
+    const grid = GetInitialGrid();
     this.setState({ grid });
   }
 
@@ -83,6 +90,13 @@ export default class PathfindingVisualizer extends Component {
         NodesInShortestPathOrderOfAstar
       );
     }
+    if (name === "bfs") {
+      const visitedNodesInOrder = bfs(grid, startNode, finishNode);
+      const NodesInShortestPathOrderOfBFS = getNodesInShortestPathOrderOfBFS(
+        finishNode
+      );
+      this.animateAlgorithm(visitedNodesInOrder, NodesInShortestPathOrderOfBFS);
+    }
   }
 
   render() {
@@ -90,32 +104,58 @@ export default class PathfindingVisualizer extends Component {
 
     return (
       <div>
-        <div className="operation-panel">
-          <button onClick={() => this.visualize("Dijkstra")} className="btn">
-            Dijkstra
-          </button>
-          <button onClick={() => this.visualize("astar")} className="btn">
-            A*
-          </button>
-          <button onClick="" className="btn-unavaliable">
-            BFS
-          </button>
-        </div>
+        <header>
+          <div className="jumbotron jumbotron-fluid">
+            <div className="container">
+              <h1 className="title">Pathfinding Visualizer</h1>
+              <div className="operation-panel">
+                <button
+                  onClick={() => this.visualize("Dijkstra")}
+                  className="btn"
+                >
+                  Dijkstra
+                </button>
+                <button onClick={() => this.visualize("astar")} className="btn">
+                  A*
+                </button>
+                <button onClick={() => this.visualize("bfs")} className="btn">
+                  BFS
+                </button>
+              </div>
+            </div>
+            <div className="instruction">
+              <ul>
+                <li>
+                  <div class="node-start"></div>Start Node
+                </li>
+                <li>
+                  <div class="node-finish"></div>Target Node
+                </li>
+                <li>
+                  <div class="unvisited"></div>Unvisited Node
+                </li>
+                <li>
+                  <div class="node-visited"></div>Visited Nodes
+                </li>
+                <li>
+                  <div class="node-shortest-path"></div>Shortest-path Node
+                </li>
+                <li>
+                  <div class="node-wall"></div>Wall Node
+                </li>
+              </ul>
+            </div>
+            <p>Drag the mouse to add wall blocks!</p>
+          </div>
+        </header>
 
-        <div className="grid">
-          <tbody>
+        <table className="grid">
+          <tbody className="grid-body">
             {grid.map((row, rowIdx) => {
               return (
                 <tr className="board-row" key={rowIdx}>
                   {row.map((node, nodeIdx) => {
-                    const {
-                      row,
-                      col,
-                      isFinish,
-                      isStart,
-                      isWall,
-                      /* gDistance, */
-                    } = node;
+                    const { row, col, isFinish, isStart, isWall } = node;
                     return (
                       <Node
                         key={nodeIdx}
@@ -132,7 +172,6 @@ export default class PathfindingVisualizer extends Component {
                         }
                         onMouseUp={() => this.handleMouseUp()}
                         row={row}
-                        // distance={gDistance}
                       ></Node>
                     );
                   })}
@@ -140,17 +179,18 @@ export default class PathfindingVisualizer extends Component {
               );
             })}
           </tbody>
-        </div>
+        </table>
       </div>
     );
   }
 }
 
-const getInitialGrid = () => {
+const GetInitialGrid = () => {
   const grid = [];
-  for (let row = 0; row < 20; row++) {
+  console.log(maxRow + " " + maxCol);
+  for (let row = 0; row < maxRow; row++) {
     const currentRow = [];
-    for (let col = 0; col < 50; col++) {
+    for (let col = 0; col < maxCol; col++) {
       currentRow.push(createNode(col, row));
     }
     grid.push(currentRow);
